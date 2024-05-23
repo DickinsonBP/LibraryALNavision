@@ -96,12 +96,12 @@ table 50100 Libros
             TableRelation = User."User Name";
             ValidateTableRelation = false;
         }
-        field(16; "Descripcion Producto"; Text[50])
+        field(15; "Descripcion Producto"; Text[50])
         {
             DataClassification = ToBeClassified;
             Editable = false;
         }
-        field(17; "calc Descripcion producto"; Text[100])
+        field(16; "calc Descripcion producto"; Text[100])
         {
             Editable = false;
             FieldClass = FlowField;
@@ -110,6 +110,11 @@ table 50100 Libros
                     "No." = field("Cod. Producto")
                 )
             );
+        }
+        field(17; BibliotecaCodigo; Code[10])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Biblioteca;
         }
     }
 

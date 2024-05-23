@@ -7,52 +7,102 @@ page 50102 "Bibliotecario Role Center"
     {
         area(rolecenter)
         {
-            // part(Control104; "Headline RC Order Processor")
-            // {
-            //     ApplicationArea = Basic, Suite;
-
-            // }
-            part(Control1901851508; "SO Processor Activities")
+            part(Control104; "Headline RC Order Processor")
             {
-                AccessByPermission = TableData "Sales Shipment Header" = R;
                 ApplicationArea = Basic, Suite;
+
+            }
+            // part(Control1901851508; "SO Processor Activities")
+            // {
+            //     AccessByPermission = TableData "Sales Shipment Header" = R;
+            //     ApplicationArea = Basic, Suite;
+            // }
+            part(Biblioteca; Biblioteca)
+            {
+                Caption = 'Biblioteca';
+                ApplicationArea = Basic, Suite;
+            }
+            part(Libros; SubpageLibros)
+            {
+                Caption = 'Libros';
+                ApplicationArea = All;
             }
         }
     }
 
     actions
     {
+        area(Reporting)
+        {
+            //
+        }
         area(sections)
         {
             group("Library Managenet")
             {
                 Caption = 'Biblioteca';
-                action(Action20)
+                action("Lista Libros")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Lista de Libros';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
                     RunObject = Page "Lista de Libros";
                 }
-                action(Action21)
+                action("Lista Editoriales")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Lista de Editoriales';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
                     RunObject = Page "Lista de Editoriales";
                 }
-                action(Action22)
+                action("Lista Autores")
                 {
                     ApplicationArea = Basic, Suite;
                     Caption = 'Lista de Autores';
-                    // Promoted = true;
-                    // PromotedCategory = Process;
                     RunObject = Page "Lista de Autores";
+                }
+                action("Lista EditorialesLibros")
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Lista de Editoriales y libros';
+                    RunObject = Page EditorialLibros;
+                }
+                action("Lista de Bibliotecas")
+                {
+                    ApplicationArea = Basic, Suite;
+                    RunObject = Page "Lista de Bibliotecas";
+                }
+            }
+            group("Loan Management")
+            {
+                caption = 'Prestamos';
+                action(Action24)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Lista de Prestamos';
+                    RunObject = Page "Lista Prestamos";
                 }
             }
         }
+        area(Creation)
+        {
+            //Secciones para añadir libros
+            action("Añadir libro")
+            {
+                ApplicationArea = All;
+                RunObject = Page FichaLibros;
+                RunPageMode = Create; //Si no se pone este campo, elige el primer libro
+            }
+            action("Añadir Biblioteca")
+            {
+                ApplicationArea = All;
+                RunObject = Page FichaBiblioteca;
+                RunPageMode = Create;
+            }
+        }
+        area(Processing)
+        {
+            //
+        }
+
     }
 }
 

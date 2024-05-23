@@ -78,6 +78,12 @@ page 50100 "Lista de Libros"
                 {
                     ApplicationArea = All;
                 }
+                field(BibliotecaCodigo; Rec.BibliotecaCodigo)
+                {
+                    Caption = 'Codigo de la biblioteca';
+                    ApplicationArea = All;
+                }
+
             }
         }
     }

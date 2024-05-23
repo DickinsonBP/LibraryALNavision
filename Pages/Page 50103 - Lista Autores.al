@@ -42,6 +42,15 @@ page 50103 "Lista de Autores"
                     ApplicationArea = All;
                 }
             }
+            group(Relaciones)
+            {
+                part(Libros; SubpageLibros)
+                {
+                    Caption = 'Libros';
+                    ApplicationArea = All;
+                    SubPageLink = Autor = field(Codigo);
+                }
+            }
         }
     }
 }

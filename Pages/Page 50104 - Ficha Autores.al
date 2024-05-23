@@ -14,7 +14,6 @@ page 50104 FichaAutores
                 field(Codigo; Rec.Codigo)
                 {
                     ApplicationArea = All;
-
                 }
                 field(Nombre; Rec.Nombre)
                 {

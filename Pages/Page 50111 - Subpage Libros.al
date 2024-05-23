@@ -1,15 +1,17 @@
-page 50101 FichaLibros
+page 50111 SubpageLibros
 {
-    PageType = Card;
+    PageType = ListPart;
     ApplicationArea = All;
-    UsageCategory = Administration;
+    UsageCategory = Lists;
     SourceTable = Libros;
+    CardPageId = FichaLibros;
+    Editable = false;
 
     layout
     {
         area(Content)
         {
-            group(GroupName)
+            repeater(Reapeater)
             {
                 field(Codigo; Rec.Codigo)
                 {
@@ -76,30 +78,7 @@ page 50101 FichaLibros
                 {
                     ApplicationArea = All;
                 }
-                field(BibliotecaCodigo; Rec.BibliotecaCodigo)
-                {
-                    ApplicationArea = All;
-                }
             }
         }
     }
-
-    actions
-    {
-        area(Processing)
-        {
-            action(ActionName)
-            {
-                ApplicationArea = All;
-
-                trigger OnAction()
-                begin
-
-                end;
-            }
-        }
-    }
-
-    var
-        myInt: Integer;
 }

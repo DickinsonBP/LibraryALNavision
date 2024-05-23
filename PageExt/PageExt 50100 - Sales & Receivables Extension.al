@@ -16,6 +16,10 @@ pageextension 50100 "Sales & Receivables Extension" extends "Sales & Receivables
             {
                 ApplicationArea = All;
             }
+            field("Nº serie Biblioteca"; Rec."Nº serie Biblioteca")
+            {
+                ApplicationArea = All;
+            }
         }
     }
 }

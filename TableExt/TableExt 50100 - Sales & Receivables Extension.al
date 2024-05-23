@@ -17,5 +17,10 @@ tableextension 50100 "Sales & Receivables Extension" extends "Sales & Receivable
             Caption = 'Nº serie Editorial';
             TableRelation = "No. Series";
         }
+        field(50103; "Nº serie Biblioteca"; Code[10])
+        {
+            Caption = 'Nº serie Biblioteca';
+            TableRelation = "No. Series";
+        }
     }
 }
