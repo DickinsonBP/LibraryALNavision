@@ -74,6 +74,12 @@ page 50102 "Bibliotecario Role Center"
                     Caption = 'Lista de Prestamos';
                     RunObject = Page "Lista Prestamos";
                 }
+                action(Action25)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = 'Lista de Usuarios';
+                    RunObject = Page "Lista de Usuarios";
+                }
             }
         }
         area(Creation)

@@ -103,9 +103,11 @@ table 50100 Libros
         }
         field(14; Usuario; Code[50])
         {
+            //TODO: Automatico
             DataClassification = ToBeClassified;
             TableRelation = User."User Name";
             ValidateTableRelation = false;
+            Editable = false;
         }
         field(15; "Descripcion Producto"; Text[50])
         {
@@ -154,6 +156,14 @@ table 50100 Libros
             Codigo,
             recSalesSetup."Nº serie Libro"
         );
+        recUser.Get();
+        // cduUser.(
+        //     recUser."Full Name",
+        //     recUser."Full Name",
+        //     0D,
+        //     Usuario,
+        //     recUser."Full Name"
+        // );
         SetActualDate();
     end;
 
@@ -165,6 +175,9 @@ table 50100 Libros
     var
         cduNumeroSeriesMng: Codeunit NoSeriesManagement;
         recSalesSetup: Record "Sales & Receivables Setup";
+        cduUser: Codeunit "User Selection";
+        recUser: Record User;
+
 
     procedure SetActualDate()
     begin
