@@ -34,16 +34,21 @@ table 50100 Libros
             DataClassification = ToBeClassified;
             trigger OnValidate()
             var
-                InputDate: Date;
+                CurrentYear: Integer;
             begin
-                InputDate := DT2Date(CurrentDateTime);
-                rec.Edad := Date2DWY(InputDate, 3) - rec."Año Publicacion";
+                CurrentYear := Date2DWY(DT2Date(CurrentDateTime), 3);
+                if CurrentYear < rec."Año Publicacion" then begin
+                    Error('Año de publicación incorrecto', rec."Año Publicacion");
+                end
+                else begin
+                    rec.Edad := CurrentYear - rec."Año Publicacion";
+                end
             end;
         }
         field(6; Autor; Code[10])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Autores;
+            TableRelation = Autores.Codigo;
         }
         field(7; Editorial; Code[10])
         {
@@ -53,6 +58,12 @@ table 50100 Libros
         field(8; Paginas; Integer)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            begin
+                if Paginas < 0 then begin
+                    Error('El numero de paginas no puede ser inferior a 0');
+                end;
+            end;
         }
         field(9; "Importe PVP"; Decimal)
         {
@@ -123,6 +134,13 @@ table 50100 Libros
         key(PK; Codigo)
         {
             Clustered = true;
+        }
+    }
+
+    fieldgroups
+    {
+        fieldgroup(DropDown; Codigo, Autor, Editorial, Paginas)
+        {
         }
     }
 

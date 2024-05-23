@@ -22,6 +22,17 @@ table 50103 Editoriales
         field(3; Correo; Text[15])
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                MailManagement: Codeunit "Mail Management";
+            begin
+                MailManagement.CheckValidEmailAddresses(rec.Correo);
+            end;
+        }
+        field(4; BibliotecaCodigo; Code[10])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Biblioteca;
         }
     }
 
@@ -35,7 +46,7 @@ table 50103 Editoriales
 
     fieldgroups
     {
-        fieldgroup(DropDown; Codigo, Nombre)
+        fieldgroup(DropDown; Codigo, Nombre, Correo)
         {
         }
     }

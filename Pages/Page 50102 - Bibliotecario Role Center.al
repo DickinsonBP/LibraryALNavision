@@ -7,19 +7,13 @@ page 50102 "Bibliotecario Role Center"
     {
         area(rolecenter)
         {
-            part(Control104; "Headline RC Order Processor")
+            part(Headline; "Custom Headline")
             {
-                ApplicationArea = Basic, Suite;
-
+                ApplicationArea = All;
             }
-            // part(Control1901851508; "SO Processor Activities")
-            // {
-            //     AccessByPermission = TableData "Sales Shipment Header" = R;
-            //     ApplicationArea = Basic, Suite;
-            // }
             part(Biblioteca; Biblioteca)
             {
-                Caption = 'Biblioteca';
+                // Caption = 'Biblioteca';
                 ApplicationArea = Basic, Suite;
             }
             part(Libros; SubpageLibros)
@@ -94,7 +88,7 @@ page 50102 "Bibliotecario Role Center"
             action("Añadir Biblioteca")
             {
                 ApplicationArea = All;
-                RunObject = Page FichaBiblioteca;
+                RunObject = Page FichaBibliotecas;
                 RunPageMode = Create;
             }
         }

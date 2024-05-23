@@ -32,6 +32,11 @@ table 50101 Autores
         {
             DataClassification = ToBeClassified;
         }
+        field(6; BibliotecaCodigo; Code[10])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Biblioteca;
+        }
         field(100; "Numero Libros"; Integer)
         {
             FieldClass = FlowField;
@@ -56,6 +61,7 @@ table 50101 Autores
         {
             FieldClass = FlowFilter;
         }
+
     }
 
     keys

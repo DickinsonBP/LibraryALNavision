@@ -5,7 +5,6 @@ page 50100 "Lista de Libros"
     UsageCategory = Lists;
     SourceTable = Libros;
     CardPageId = FichaLibros;
-    Editable = false;
 
     layout
     {
@@ -65,6 +64,7 @@ page 50100 "Lista de Libros"
                 field(Edad; Rec.Edad)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Años desde el primer año de publicación';
                 }
                 field(Usuario; Rec.Usuario)
                 {

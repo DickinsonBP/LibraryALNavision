@@ -1,6 +1,8 @@
 table 50102 Biblioteca
 {
     DataClassification = ToBeClassified;
+    LookupPageId = "Lista de Bibliotecas";
+    DrillDownPageId = "Lista de Bibliotecas";
 
     fields
     {
@@ -19,6 +21,18 @@ table 50102 Biblioteca
             CalcFormula = count(Libros where(BibliotecaCodigo = field(Codigo)));
             Editable = false;
         }
+        field(3; "Numero de Autores"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count(Autores where(BibliotecaCodigo = field(Codigo)));
+            Editable = false;
+        }
+        field(4; "Numero de Editoriales"; Integer)
+        {
+            FieldClass = FlowField;
+            CalcFormula = count(Editoriales where(BibliotecaCodigo = field(Codigo)));
+            Editable = false;
+        }
     }
 
 
@@ -27,6 +41,13 @@ table 50102 Biblioteca
         key(PK; Codigo)
         {
             Clustered = true;
+        }
+    }
+
+    fieldgroups
+    {
+        fieldgroup(DropDown; Codigo, "Numero de libros")
+        {
         }
     }
 
@@ -41,6 +62,8 @@ table 50102 Biblioteca
             recSalesSetup."Nº serie Biblioteca"
         );
     end;
+
+
 
     var
         cduNumeroSeriesMng: Codeunit NoSeriesManagement;

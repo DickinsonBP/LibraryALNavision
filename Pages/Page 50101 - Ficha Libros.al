@@ -63,6 +63,8 @@ page 50101 FichaLibros
                 field(Edad; Rec.Edad)
                 {
                     ApplicationArea = All;
+                    ToolTip = 'Años desde el primer año de publicación';
+                    Importance = Additional;
                 }
                 field(Usuario; Rec.Usuario)
                 {
@@ -75,10 +77,12 @@ page 50101 FichaLibros
                 field("calc Descripcion producto"; Rec."calc Descripcion producto")
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
                 field(BibliotecaCodigo; Rec.BibliotecaCodigo)
                 {
                     ApplicationArea = All;
+                    Importance = Additional;
                 }
             }
         }

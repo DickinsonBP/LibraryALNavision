@@ -4,7 +4,7 @@ page 50116 "Lista de Bibliotecas"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = Biblioteca;
-    CardPageId = FichaBiblioteca;
+    CardPageId = FichaBibliotecas;
 
     layout
     {
@@ -18,6 +18,14 @@ page 50116 "Lista de Bibliotecas"
 
                 }
                 field("Numero de libros"; Rec."Numero de libros")
+                {
+                    ApplicationArea = All;
+                }
+                field("Numero de Autores"; Rec."Numero de Autores")
+                {
+                    ApplicationArea = All;
+                }
+                field("Numero de Editoriales"; Rec."Numero de Editoriales")
                 {
                     ApplicationArea = All;
                 }
