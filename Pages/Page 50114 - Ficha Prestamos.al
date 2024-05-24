@@ -11,14 +11,14 @@ page 50114 FichaPrestamos
         {
             group(GroupName)
             {
+                field("Num. Prestamos"; Rec."Num. Prestamo")
+                {
+                    ApplicationArea = All;
+                }
                 field("Cod. Libro"; Rec."Cod. Libro")
                 {
                     ApplicationArea = All;
 
-                }
-                field("Num. Prestamos"; Rec."Num. Prestamos")
-                {
-                    ApplicationArea = All;
                 }
                 field("Descripcion Libro"; Rec."Descripcion Libro")
                 {

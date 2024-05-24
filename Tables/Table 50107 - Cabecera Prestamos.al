@@ -11,6 +11,7 @@ table 50107 "Cabecera Prestamos"
         field(2; "Cod. Cliente"; Code[20])
         {
             DataClassification = ToBeClassified;
+            TableRelation = Usuarios.Codigo;
         }
         field(3; "Nombre Cliente"; Text[50])
         {

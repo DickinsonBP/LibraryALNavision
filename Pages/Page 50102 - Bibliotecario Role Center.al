@@ -97,6 +97,18 @@ page 50102 "Bibliotecario Role Center"
                 RunObject = Page FichaBibliotecas;
                 RunPageMode = Create;
             }
+            action("Añadir Prestamo")
+            {
+                ApplicationArea = All;
+                RunObject = Page FichaPrestamos;
+                RunPageMode = Create;
+            }
+            action("Añadir Usuario")
+            {
+                ApplicationArea = All;
+                RunObject = Page FichaUsuarios;
+                RunPageMode = Create;
+            }
         }
         area(Processing)
         {

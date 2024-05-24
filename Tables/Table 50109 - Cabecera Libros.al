@@ -1,27 +1,28 @@
-table 50109 Usuarios
+table 50109 CabeceraLibros
 {
     DataClassification = ToBeClassified;
 
     fields
     {
-        field(1; Codigo; Code[10])
+        field(1; "Cod. Prestamos"; Code[10])
         {
             DataClassification = ToBeClassified;
 
         }
-        field(2; Nombre; Text[50])
+        field(2; "Cod. Usuario"; Code[20])
+        {
+            DataClassification = ToBeClassified;
+            TableRelation = Usuarios.Codigo;
+        }
+        field(3; "Fecha venta"; Date)
         {
             DataClassification = ToBeClassified;
         }
-        field(3; Direccion; Text[50])
+        field(4; Registrado; Boolean)
         {
             DataClassification = ToBeClassified;
         }
-        field(4; Poblacion; Text[30])
-        {
-            DataClassification = ToBeClassified;
-        }
-        field(5; Telefono; Text[50])
+        field(5; "Precio Total"; Decimal)
         {
             DataClassification = ToBeClassified;
         }
@@ -29,7 +30,7 @@ table 50109 Usuarios
 
     keys
     {
-        key(PK; Codigo)
+        key(PK; "Cod. Prestamos")
         {
             Clustered = true;
         }

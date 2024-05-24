@@ -141,7 +141,7 @@ table 50100 Libros
 
     fieldgroups
     {
-        fieldgroup(DropDown; Codigo, Autor, Editorial, Paginas)
+        fieldgroup(DropDown; Codigo, Descripcion, Autor, Editorial, Paginas, "Importe PVP")
         {
         }
     }
@@ -156,7 +156,7 @@ table 50100 Libros
             Codigo,
             recSalesSetup."Nº serie Libro"
         );
-        recUser.Get();
+        // recUser.Get();
         // cduUser.(
         //     recUser."Full Name",
         //     recUser."Full Name",

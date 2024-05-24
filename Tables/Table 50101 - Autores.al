@@ -31,6 +31,15 @@ table 50101 Autores
         field(5; "Fecha Nacimiento"; Date)
         {
             DataClassification = ToBeClassified;
+            trigger OnValidate()
+            var
+                CurrentDate: Date;
+            begin
+                CurrentDate := DT2Date(CurrentDateTime);
+                if CurrentDate < rec."Fecha Nacimiento" then begin
+                    Error('Fecha de nacimiento incorrecta', rec."Fecha Nacimiento");
+                end
+            end;
         }
         field(6; BibliotecaCodigo; Code[10])
         {
