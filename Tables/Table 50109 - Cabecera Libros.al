@@ -24,7 +24,13 @@ table 50109 CabeceraLibros
         }
         field(5; "Precio Total"; Decimal)
         {
-            DataClassification = ToBeClassified;
+            FieldClass = FlowField;
+            CalcFormula = sum(
+                "Prestamos Libros".Precio
+                where(
+                    "Num. Prestamo" = field("Cod. Prestamos")
+                )
+            );
         }
     }
 

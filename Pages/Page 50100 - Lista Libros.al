@@ -85,6 +85,15 @@ page 50100 "Lista de Libros"
                 }
 
             }
+            group(Relaciones)
+            {
+                part(Libros; SubpageMovimientosPrestamos)
+                {
+                    Caption = 'Prestamos';
+                    ApplicationArea = All;
+                    SubPageLink = "Cod. Libro" = field(Codigo);
+                }
+            }
         }
     }
 }

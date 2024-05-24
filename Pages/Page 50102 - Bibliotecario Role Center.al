@@ -21,6 +21,11 @@ page 50102 "Bibliotecario Role Center"
                 Caption = 'Libros';
                 ApplicationArea = All;
             }
+            part(Prestamos; SubpageMovimientosPrestamos)
+            {
+                Caption = 'Prestamos';
+                ApplicationArea = All;
+            }
         }
     }
 

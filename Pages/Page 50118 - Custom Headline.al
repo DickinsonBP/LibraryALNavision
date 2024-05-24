@@ -1,6 +1,7 @@
 page 50118 "Custom Headline"
 {
     PageType = HeadlinePart;
+    SourceTable = Biblioteca;
 
     layout
     {
@@ -15,24 +16,18 @@ page 50118 "Custom Headline"
                     Hyperlink(DrillDownURLTxt)
                 end;
             }
-            field(HeadLine2; hdlTxt2)
+            field(HeadLine2; StrSubstNo(hdlTxt2, rec."Numero de libros"))
             {
-
+                ApplicationArea = All;
             }
-            field(HeadLine3; hdlTxt3)
-            {
-
-            }
-            field(HeadLine4; hdlTxt4)
-            {
-
-            }
+            field(HeadLine3; StrSubstNo(hdlTxt3, rec."Numero de autores")) { ApplicationArea = All; }
+            field(HeadLine4; StrSubstNo(hdlTxt4, rec."Numero de editoriales")) { ApplicationArea = All; }
         }
     }
 
     var
         hdlTxt1: Label 'HOLAAAAAAAAAAA';
-        hdlTxt2: Label 'EEEEEEEEEEEE';
-        hdlTxt3: Label 'FJKLASDKJLÑFASD';
-        hdlTxt4: Label '1234';
+        hdlTxt2: Label 'Numero de libros %1';
+        hdlTxt3: Label 'Numero de autores %1';
+        hdlTxt4: Label 'Numero de editoriales %1';
 }
