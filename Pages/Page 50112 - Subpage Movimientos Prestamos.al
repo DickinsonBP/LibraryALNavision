@@ -2,7 +2,7 @@ page 50112 SubpageMovimientosPrestamos
 {
     PageType = ListPart;
     // ApplicationArea = All;
-    SourceTable = "Movimientos Prestamos Libros";
+    SourceTable = "Movimientos Prestamos Libros"; //TODO: Crear tabla para que se relacione
     CardPageId = FichaPrestamos;
     Editable = false;
     layout

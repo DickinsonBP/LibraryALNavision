@@ -48,7 +48,10 @@ page 50114 FichaPrestamos
                 {
                     Caption = 'Lineas';
                     ApplicationArea = All;
+                    Enabled = rec."Cod. Cliente" <> '';
+                    SubPageLink = "Codigo Prestamo" = field(Codigo);
                 }
+                //TODO: Añadir part para poner precios totales calculados de los libros
             }
         }
     }
@@ -62,6 +65,7 @@ page 50114 FichaPrestamos
                 trigger OnAction()
                 begin
                     rec.Registrado := true;
+                    //TODO: Cuando se clique se tiene que "borrar" la ficha y el valor de las lineas se crea un movimiento de prestamos
                 end;
             }
         }

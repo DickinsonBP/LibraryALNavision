@@ -22,16 +22,6 @@ table 50109 CabeceraLibros
         {
             DataClassification = ToBeClassified;
         }
-        // field(5; "Precio Total"; Decimal)
-        // {
-        //     FieldClass = FlowField;
-        //     CalcFormula = sum(
-        //         "Movimientos Prestamos Libros".Precio
-        //         where(
-        //             "Num. Prestamo" = field("Cod. Prestamos")
-        //         )
-        //     );
-        // }
     }
 
     keys
