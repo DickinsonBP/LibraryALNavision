@@ -19,6 +19,10 @@ page 50115 SubpageLineasPrestamos
                 {
                     ApplicationArea = All;
                 }
+                field("Cod Libro"; Rec."Cod Libro")
+                {
+                    ApplicationArea = All;
+                }
                 field("Descripcion libro"; Rec."Descripcion libro")
                 {
                     ApplicationArea = All;
@@ -47,11 +51,11 @@ page 50115 SubpageLineasPrestamos
                 {
                     ApplicationArea = All;
                 }
-                field("Fecha fin"; Rec."Fecha fin")
+                field(Dias; Rec.Dias)
                 {
                     ApplicationArea = All;
                 }
-                field(Dias; Rec.Dias)
+                field("Fecha fin"; Rec."Fecha fin")
                 {
                     ApplicationArea = All;
                 }
@@ -60,10 +64,6 @@ page 50115 SubpageLineasPrestamos
                     ApplicationArea = All;
                 }
                 field(Importe; Rec.Importe)
-                {
-                    ApplicationArea = All;
-                }
-                field("Cod Libro"; Rec."Cod Libro")
                 {
                     ApplicationArea = All;
                 }

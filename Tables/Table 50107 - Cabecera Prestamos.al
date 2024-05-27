@@ -57,14 +57,18 @@ table 50107 "Cabecera Prestamos"
 
             trigger OnValidate()
             begin
+                recLineasPrestamo.Get(Codigo);
                 SalesSetup.Get();
                 Codigo := NoSeriesMgt.GetNextNo("Nº serie", WorkDate(), true);
+                recLineasPrestamo."Codigo Prestamo" := Codigo;
+                // Modify();
             end;
         }
         field(10; Registrado; Boolean)
         {
             DataClassification = ToBeClassified;
             //TODO: crear accion para hacer boton de registrar y actualizar valor de registrado.
+            Editable = false;
         }
     }
 
@@ -80,6 +84,7 @@ table 50107 "Cabecera Prestamos"
     var
         SalesSetup: Record "Sales & Receivables Setup";
         NoSeriesMgt: Codeunit NoSeriesManagement;
+        recLineasPrestamo: Record LineasPrestamos;
 
     trigger OnInsert()
     var
@@ -90,6 +95,23 @@ table 50107 "Cabecera Prestamos"
             "Nº serie" := SalesSetup."Nº serie prestamo";
             Codigo := NoSeriesMgt.GetNextNo("Nº serie", WorkDate(), true);
             // Codigo := NoSeriesMgt.InitSeries("Nº serie", WorkDate(), true);
+            "Fecha Venta" := DT2Date(CurrentDateTime);
+            CreateLinea();
         end;
+    end;
+
+    trigger OnModify()
+    begin
+        recLineasPrestamo.Get(rec.Codigo);
+        recLineasPrestamo."No. Cliente" := rec."Cod. Cliente";
+        recLineasPrestamo.Modify(true);
+    end;
+
+    procedure CreateLinea()
+    begin
+        recLineasPrestamo.Init();
+        recLineasPrestamo."Codigo Prestamo" := rec.Codigo;
+        // recLineasPrestamo."Fecha inicio Prestamo" := DT2Date(CurrentDateTime);
+        recLineasPrestamo.Insert(true, false); //NO EJECUTA ONINSERT
     end;
 }

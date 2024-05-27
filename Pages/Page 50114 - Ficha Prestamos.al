@@ -52,4 +52,18 @@ page 50114 FichaPrestamos
             }
         }
     }
+    actions
+    {
+        area(Processing)
+        {
+            action("Registrar")
+            {
+                ApplicationArea = All;
+                trigger OnAction()
+                begin
+                    rec.Registrado := true;
+                end;
+            }
+        }
+    }
 }
