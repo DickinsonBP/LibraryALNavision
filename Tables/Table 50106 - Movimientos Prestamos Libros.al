@@ -1,4 +1,4 @@
-table 50106 "Prestamos Libros"
+table 50106 "Movimientos Prestamos Libros"
 {
     DataClassification = ToBeClassified;
     LookupPageId = "Lista Prestamos";
@@ -21,15 +21,11 @@ table 50106 "Prestamos Libros"
                 end;
             end;
         }
-        field(2; "Num. Prestamo"; Code[10])
+        field(2; "Num. Prestamo"; Integer)
         {
+            //TODO: El numero de prestamo es único por cada prestamo. No se incrementa por que por cada nuevo prestamo se genera uno nuevo por defecto.
             DataClassification = ToBeClassified;
-            //TODO: Hacer autoincremental
-            trigger OnValidate()
-            begin
-                "Num. Prestamo" := cduNumeroSeriesMng.GetNextNo(recSalesSetup."Nº serie Prestamo", WorkDate(), true);
-                Modify();
-            end;
+            Editable = false;
         }
         field(3; "Descripcion Libro"; Text[50])
         {
@@ -44,16 +40,16 @@ table 50106 "Prestamos Libros"
         field(5; "No. Cliente"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Usuarios.Codigo;
+            TableRelation = Customer;
             trigger OnValidate()
             var
-                recUsuario: Record Usuarios;
+                recUsuario: Record Customer;
             begin
                 if recUsuario.Get("No. Cliente") then begin
-                    rec."Nombre Cliente" := recUsuario.Nombre;
-                    rec."Direccion Cliente" := recUsuario.Direccion;
-                    rec."Poblacion Cliente" := recUsuario.Poblacion;
-                    rec."Telefono Cliente" := recUsuario.Telefono;
+                    rec."Nombre Cliente" := recUsuario.Name;
+                    rec."Direccion Cliente" := recUsuario.Address;
+                    rec."Poblacion Cliente" := recUsuario.City;
+                    rec."Telefono Cliente" := recUsuario."Phone No.";
                 end;
             end;
         }
@@ -119,14 +115,7 @@ table 50106 "Prestamos Libros"
 
     trigger OnInsert()
     begin
-        recSalesSetup.Get();
-        cduNumeroSeriesMng.InitSeries(
-            recSalesSetup."Nº serie Prestamo",
-            recSalesSetup."Nº serie Prestamo",
-            0D,
-            "Num. Prestamo",
-            recSalesSetup."Nº serie Prestamo"
-        );
+        "Num. Prestamo" := "Num. Prestamo" + 1;
         SetActualDate();
     end;
 

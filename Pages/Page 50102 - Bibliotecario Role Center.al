@@ -79,12 +79,12 @@ page 50102 "Bibliotecario Role Center"
                     Caption = 'Lista de Prestamos';
                     RunObject = Page "Lista Prestamos";
                 }
-                action(Action25)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = 'Lista de Usuarios';
-                    RunObject = Page "Lista de Usuarios";
-                }
+                // action(Action25)
+                // {
+                //     ApplicationArea = Basic, Suite;
+                //     Caption = 'Lista de Usuarios';
+                //     RunObject = Page "Lista de Usuarios";
+                // }
             }
         }
         area(Creation)
@@ -106,12 +106,6 @@ page 50102 "Bibliotecario Role Center"
             {
                 ApplicationArea = All;
                 RunObject = Page FichaPrestamos;
-                RunPageMode = Create;
-            }
-            action("Añadir Usuario")
-            {
-                ApplicationArea = All;
-                RunObject = Page FichaUsuarios;
                 RunPageMode = Create;
             }
         }

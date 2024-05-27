@@ -3,65 +3,50 @@ page 50114 FichaPrestamos
     PageType = Card;
     ApplicationArea = All;
     UsageCategory = Administration;
-    SourceTable = "Prestamos Libros";
+    SourceTable = "Cabecera Prestamos";
 
     layout
     {
         area(Content)
         {
-            group(GroupName)
+            group("Cabecera prestamo")
             {
-                field("Num. Prestamos"; Rec."Num. Prestamo")
+                field(Codigo; Rec."Codigo")
                 {
                     ApplicationArea = All;
                 }
-                field("Cod. Libro"; Rec."Cod. Libro")
+                field("Cod. Cliente"; Rec."Cod. Cliente")
                 {
                     ApplicationArea = All;
 
-                }
-                field("Descripcion Libro"; Rec."Descripcion Libro")
-                {
-                    ApplicationArea = All;
-                }
-                field("Fecha inicio Prestamo"; Rec."Fecha inicio Prestamo")
-                {
-                    ApplicationArea = All;
-                }
-                field("No. Cliente"; Rec."No. Cliente")
-                {
-                    ApplicationArea = All;
                 }
                 field("Nombre Cliente"; Rec."Nombre Cliente")
                 {
                     ApplicationArea = All;
                 }
-                field("Direccion Cliente"; Rec."Direccion Cliente")
+                field("Telefono cliente"; Rec."Telefono cliente")
                 {
                     ApplicationArea = All;
                 }
-                field("Poblacion Cliente"; Rec."Poblacion Cliente")
+                field("Fecha Venta"; Rec."Fecha Venta")
                 {
                     ApplicationArea = All;
                 }
-                field("Telefono Cliente"; Rec."Telefono Cliente")
+                field("Nº Serie"; Rec."Nº Serie")
                 {
                     ApplicationArea = All;
                 }
-                field("Fecha fin"; Rec."Fecha fin")
+                field(Registrado; Rec.Registrado)
                 {
                     ApplicationArea = All;
                 }
-                field(Dias; Rec.Dias)
+
+            }
+            group("Lineas")
+            {
+                part(Lines; SubpageLineasPrestamos)
                 {
-                    ApplicationArea = All;
-                }
-                field(Precio; Rec.Precio)
-                {
-                    ApplicationArea = All;
-                }
-                field(Importe; Rec.Importe)
-                {
+                    Caption = 'Lineas';
                     ApplicationArea = All;
                 }
             }

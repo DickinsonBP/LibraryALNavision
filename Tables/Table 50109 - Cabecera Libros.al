@@ -12,7 +12,7 @@ table 50109 CabeceraLibros
         field(2; "Cod. Usuario"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Usuarios.Codigo;
+            // TableRelation = Usuarios.Codigo;
         }
         field(3; "Fecha venta"; Date)
         {
@@ -22,16 +22,16 @@ table 50109 CabeceraLibros
         {
             DataClassification = ToBeClassified;
         }
-        field(5; "Precio Total"; Decimal)
-        {
-            FieldClass = FlowField;
-            CalcFormula = sum(
-                "Prestamos Libros".Precio
-                where(
-                    "Num. Prestamo" = field("Cod. Prestamos")
-                )
-            );
-        }
+        // field(5; "Precio Total"; Decimal)
+        // {
+        //     FieldClass = FlowField;
+        //     CalcFormula = sum(
+        //         "Movimientos Prestamos Libros".Precio
+        //         where(
+        //             "Num. Prestamo" = field("Cod. Prestamos")
+        //         )
+        //     );
+        // }
     }
 
     keys

@@ -1,34 +1,29 @@
-page 50112 SubpageMovimientosPrestamos
+page 50115 SubpageLineasPrestamos
 {
+    Caption = 'Lineas';
     PageType = ListPart;
-    // ApplicationArea = All;
-    SourceTable = "Movimientos Prestamos Libros";
-    CardPageId = FichaPrestamos;
-    Editable = false;
+    UsageCategory = Administration;
+    SourceTable = LineasPrestamos;
+
     layout
     {
         area(Content)
         {
             repeater(Repeater)
             {
-                field("Cod. Libro"; Rec."Cod. Libro")
-                {
-                    ApplicationArea = All;
-
-                }
-                field("Num. Prestamo"; Rec."Num. Prestamo")
+                field("Codigo Prestamo"; Rec."Codigo Prestamo")
                 {
                     ApplicationArea = All;
                 }
-                field("Descripcion Libro"; Rec."Descripcion Libro")
+                field("Num. linea"; Rec."Num. linea")
+                {
+                    ApplicationArea = All;
+                }
+                field("Descripcion libro"; Rec."Descripcion libro")
                 {
                     ApplicationArea = All;
                 }
                 field("Fecha inicio Prestamo"; Rec."Fecha inicio Prestamo")
-                {
-                    ApplicationArea = All;
-                }
-                field("Fecha fin"; Rec."Fecha fin")
                 {
                     ApplicationArea = All;
                 }
@@ -52,6 +47,10 @@ page 50112 SubpageMovimientosPrestamos
                 {
                     ApplicationArea = All;
                 }
+                field("Fecha fin"; Rec."Fecha fin")
+                {
+                    ApplicationArea = All;
+                }
                 field(Dias; Rec.Dias)
                 {
                     ApplicationArea = All;
@@ -64,7 +63,10 @@ page 50112 SubpageMovimientosPrestamos
                 {
                     ApplicationArea = All;
                 }
-
+                field("Cod Libro"; Rec."Cod Libro")
+                {
+                    ApplicationArea = All;
+                }
             }
         }
     }

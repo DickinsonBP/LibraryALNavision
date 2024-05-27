@@ -3,7 +3,7 @@ page 50113 "Lista Prestamos"
     PageType = List;
     ApplicationArea = All;
     UsageCategory = Lists;
-    SourceTable = "Prestamos Libros";
+    SourceTable = "Cabecera Prestamos";
     CardPageId = FichaPrestamos;
 
     layout
@@ -12,24 +12,11 @@ page 50113 "Lista Prestamos"
         {
             repeater(Repeater)
             {
-                field("Num. Prestamos"; Rec."Num. Prestamo")
+                field(Codigo; Rec.Codigo)
                 {
                     ApplicationArea = All;
                 }
-                field("Cod. Libro"; Rec."Cod. Libro")
-                {
-                    ApplicationArea = All;
-
-                }
-                field("Descripcion Libro"; Rec."Descripcion Libro")
-                {
-                    ApplicationArea = All;
-                }
-                field("Fecha inicio Prestamo"; Rec."Fecha inicio Prestamo")
-                {
-                    ApplicationArea = All;
-                }
-                field("No. Cliente"; Rec."No. Cliente")
+                field("Cod. Cliente"; Rec."Cod. Cliente")
                 {
                     ApplicationArea = All;
                 }
@@ -37,35 +24,43 @@ page 50113 "Lista Prestamos"
                 {
                     ApplicationArea = All;
                 }
-                field("Direccion Cliente"; Rec."Direccion Cliente")
+                field("Telefono cliente"; Rec."Telefono cliente")
                 {
                     ApplicationArea = All;
                 }
-                field("Poblacion Cliente"; Rec."Poblacion Cliente")
+                field("Fecha Venta"; Rec."Fecha Venta")
                 {
                     ApplicationArea = All;
                 }
-                field("Telefono Cliente"; Rec."Telefono Cliente")
+                field("Nº Serie"; Rec."Nº Serie")
                 {
                     ApplicationArea = All;
                 }
-                field("Fecha fin"; Rec."Fecha fin")
+                field(Registrado; Rec.Registrado)
                 {
                     ApplicationArea = All;
                 }
-                field(Dias; Rec.Dias)
-                {
-                    ApplicationArea = All;
-                }
-                field(Precio; Rec.Precio)
-                {
-                    ApplicationArea = All;
-                }
-                field(Importe; Rec.Importe)
-                {
-                    ApplicationArea = All;
-                }
+
             }
         }
     }
+
+    actions
+    {
+        area(Processing)
+        {
+            action(ActionName)
+            {
+                ApplicationArea = All;
+
+                trigger OnAction()
+                begin
+
+                end;
+            }
+        }
+    }
+
+    var
+        myInt: Integer;
 }

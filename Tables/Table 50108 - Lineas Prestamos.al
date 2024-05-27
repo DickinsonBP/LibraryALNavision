@@ -7,6 +7,7 @@ table 50108 LineasPrestamos
         field(1; "Codigo Prestamo"; Code[10])
         {
             DataClassification = ToBeClassified;
+            TableRelation = "Cabecera Prestamos".Codigo;
         }
         field(2; "Num. Linea"; Integer)
         {
