@@ -1,7 +1,7 @@
 page 50114 FichaPrestamos
 {
     PageType = Card;
-    ApplicationArea = All;
+    // ApplicationArea = All;
     UsageCategory = Administration;
     SourceTable = "Cabecera Prestamos";
 
@@ -63,9 +63,21 @@ page 50114 FichaPrestamos
             {
                 ApplicationArea = All;
                 trigger OnAction()
+                var
+                    recMovimientosPrestamos: Record "Movimientos Prestamos Libros";
+                    recLineaPrestamo: Record LineasPrestamos;
                 begin
                     rec.Registrado := true;
                     //TODO: Cuando se clique se tiene que "borrar" la ficha y el valor de las lineas se crea un movimiento de prestamos
+                    recMovimientosPrestamos.Init();
+                    recMovimientosPrestamos."No. Cliente" := rec."Cod. Cliente";
+
+                    if recLineaPrestamo.Get(rec.Codigo) then begin
+                        recMovimientosPrestamos."Cod. Libro" := recLineaPrestamo."Cod Libro";
+                        recMovimientosPrestamos."Fecha inicio Prestamo" := recLineaPrestamo."Fecha inicio Prestamo";
+                        recMovimientosPrestamos.Dias := recLineaPrestamo.Dias; //Se calcula la fecha de fin automaticamente en la tabla
+                    end;
+                    recMovimientosPrestamos.Insert(true, false);
                 end;
             }
         }

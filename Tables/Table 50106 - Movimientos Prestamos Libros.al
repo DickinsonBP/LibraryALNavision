@@ -1,25 +1,14 @@
 table 50106 "Movimientos Prestamos Libros"
 {
     DataClassification = ToBeClassified;
-    LookupPageId = "Lista Prestamos";
-    DrillDownPageId = "Lista Prestamos";
+
     fields
     {
         field(1; "Cod. Libro"; Code[10])
         {
             DataClassification = ToBeClassified;
             TableRelation = Libros.Codigo;
-
-            trigger OnValidate()
-            var
-                recLibro: Record Libros;
-            begin
-                if recLibro.Get("Cod. Libro") then begin
-                    rec."Descripcion Libro" := recLibro.Descripcion;
-                    rec.Importe := recLibro."Importe PVP";
-                    rec.Precio := Importe * 0.1;
-                end;
-            end;
+            Editable = false;
         }
         field(2; "Num. Prestamo"; Integer)
         {
@@ -40,7 +29,7 @@ table 50106 "Movimientos Prestamos Libros"
         field(5; "No. Cliente"; Code[20])
         {
             DataClassification = ToBeClassified;
-            TableRelation = Customer;
+            TableRelation = Customer."No.";
             trigger OnValidate()
             var
                 recUsuario: Record Customer;
@@ -104,7 +93,7 @@ table 50106 "Movimientos Prestamos Libros"
 
     keys
     {
-        key(PK; "Num. Prestamo")
+        key(PK; "Num. Prestamo", "Cod. Libro", "No. Cliente")
         {
             Clustered = true;
         }
@@ -114,13 +103,23 @@ table 50106 "Movimientos Prestamos Libros"
         recSalesSetup: Record "Sales & Receivables Setup";
 
     trigger OnInsert()
+    var
+        recUsuario: Record Customer;
+        recLibro: Record Libros;
     begin
         "Num. Prestamo" := "Num. Prestamo" + 1;
-        SetActualDate();
-    end;
+        if recUsuario.Get("No. Cliente") then begin
+            rec."Nombre Cliente" := recUsuario.Name;
+            rec."Direccion Cliente" := recUsuario.Address;
+            rec."Poblacion Cliente" := recUsuario.City;
+            rec."Telefono Cliente" := recUsuario."Phone No.";
+        end;
+        if recLibro.Get("Cod. Libro") then begin
+            rec."Descripcion Libro" := recLibro.Descripcion;
+            rec.Importe := recLibro."Importe PVP";
+            rec.Precio := Importe * 0.1;
+        end;
 
-    procedure SetActualDate()
-    begin
-        "Fecha inicio Prestamo" := DT2Date(CurrentDateTime);
+        "Fecha fin" := rec."Fecha inicio Prestamo" + Dias;
     end;
 }
