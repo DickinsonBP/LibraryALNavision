@@ -68,7 +68,6 @@ page 50114 FichaPrestamos
                     recLineaPrestamo: Record LineasPrestamos;
                 begin
                     rec.Registrado := true;
-                    //TODO: Cuando se clique se tiene que "borrar" la ficha y el valor de las lineas se crea un movimiento de prestamos
                     recMovimientosPrestamos.Init();
                     recMovimientosPrestamos."No. Cliente" := rec."Cod. Cliente";
 

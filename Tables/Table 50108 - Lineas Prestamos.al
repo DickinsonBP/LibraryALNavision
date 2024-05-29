@@ -4,7 +4,7 @@ table 50108 LineasPrestamos
 
     fields
     {
-        field(1; "Codigo Prestamo"; Code[10])
+        field(1; "Codigo Prestamo"; Code[20])
         {
             DataClassification = ToBeClassified;
             TableRelation = "Cabecera Prestamos".Codigo;
@@ -14,6 +14,7 @@ table 50108 LineasPrestamos
         field(2; "Num. linea"; Integer)
         {
             DataClassification = ToBeClassified;
+            // AutoIncrement = true;
         }
         field(3; "Descripcion Libro"; Text[50])
         {
@@ -101,15 +102,39 @@ table 50108 LineasPrestamos
 
     keys
     {
-        key(PK; "Codigo Prestamo")
+        key(PK; "Codigo Prestamo", "Num. linea")
         {
             Clustered = true;
+        }
+        key(LineaInfo; "Num. linea")
+        {
         }
     }
 
     trigger OnInsert()
+    var
+        recLineasPrestamo: Record LineasPrestamos;
+        recUsuario: Record Customer;
+        lCodigoNuevo: Code[20];
     begin
         SetStartDate();
+        "Num. linea" := 1000;
+
+        lCodigoNuevo := "Codigo Prestamo";
+        "Codigo Prestamo" := '';
+        recLineasPrestamo.SetRange("Codigo Prestamo", lCodigoNuevo);
+        if recLineasPrestamo.FindLast() then begin
+            "No. Cliente" := recLineasPrestamo."No. Cliente";
+            if recUsuario.Get(recLineasPrestamo."No. Cliente") then begin
+                rec."Nombre Cliente" := recUsuario.Name;
+                rec."Direccion Cliente" := recUsuario.Address;
+                rec."Poblacion Cliente" := recusuario.City;
+                rec."Telefono Cliente" := recUsuario."Phone No.";
+            end;
+        end;
+        "Codigo Prestamo" := lCodigoNuevo;
+        "Num. linea" := recLineasPrestamo."Num. linea" + 1000;
+
     end;
 
     trigger OnModify()

@@ -15,6 +15,7 @@ table 50106 "Movimientos Prestamos Libros"
             //TODO: El numero de prestamo es único por cada prestamo. No se incrementa por que por cada nuevo prestamo se genera uno nuevo por defecto.
             DataClassification = ToBeClassified;
             Editable = false;
+            // AutoIncrement = true;
         }
         field(3; "Descripcion Libro"; Text[50])
         {
@@ -82,7 +83,6 @@ table 50106 "Movimientos Prestamos Libros"
         field(12; Precio; Decimal)
         {
             DataClassification = ToBeClassified;
-            //TODO: Calcular precio del importe
         }
         field(13; Importe; Decimal)
         {

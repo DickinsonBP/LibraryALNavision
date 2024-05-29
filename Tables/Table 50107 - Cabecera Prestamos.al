@@ -56,18 +56,25 @@ table 50107 "Cabecera Prestamos"
             TableRelation = "No. Series";
 
             trigger OnValidate()
+            var
+                lNuevoCodigo: Code[20];
             begin
-                recLineasPrestamo.Get(Codigo);
+                recLineasPrestamo.SetRange("Codigo Prestamo", rec.Codigo);
                 SalesSetup.Get();
-                Codigo := NoSeriesMgt.GetNextNo("Nº serie", WorkDate(), true);
-                recLineasPrestamo."Codigo Prestamo" := Codigo;
+                lNuevoCodigo := NoSeriesMgt.GetNextNo("Nº serie", WorkDate(), true);
+
+                if recLineasPrestamo.FindFirst() then begin
+                    repeat
+                        recLineasPrestamo."Codigo Prestamo" := lNuevoCodigo;
+                    until recLineasPrestamo.Next() = 0;
+                end;
+                rec.Codigo := lNuevoCodigo;
                 // Modify();
             end;
         }
         field(10; Registrado; Boolean)
         {
             DataClassification = ToBeClassified;
-            //TODO: crear accion para hacer boton de registrar y actualizar valor de registrado.
             Editable = false;
         }
     }
@@ -102,9 +109,19 @@ table 50107 "Cabecera Prestamos"
 
     trigger OnModify()
     begin
-        recLineasPrestamo.Get(rec.Codigo);
-        recLineasPrestamo."No. Cliente" := rec."Cod. Cliente";
-        recLineasPrestamo.Modify(true);
+        recLineasPrestamo.SetRange("Codigo Prestamo", rec.Codigo);
+        if recLineasPrestamo.FindFirst() then begin
+            repeat
+                recLineasPrestamo."No. Cliente" := rec."Cod. Cliente";
+                recLineasPrestamo.Modify(true);
+            until recLineasPrestamo.Next() = 0;
+        end;
+    end;
+
+    trigger OnDelete()
+    begin
+        recLineasPrestamo.SetRange("Codigo Prestamo", rec.Codigo);
+        recLineasPrestamo.DeleteAll(); //Borrar todas las lineas asignadas a este prestamo
     end;
 
     procedure CreateLinea()

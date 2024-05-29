@@ -103,7 +103,6 @@ table 50100 Libros
         }
         field(14; Usuario; Code[50])
         {
-            //TODO: Automatico
             DataClassification = ToBeClassified;
             TableRelation = User."User Name";
             ValidateTableRelation = false;

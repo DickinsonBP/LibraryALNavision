@@ -15,10 +15,10 @@ page 50115 SubpageLineasPrestamos
                 {
                     ApplicationArea = All;
                 }
-                field("Num. linea"; Rec."Num. linea")
-                {
-                    ApplicationArea = All;
-                }
+                // field("Num. linea"; Rec."Num. linea")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Cod Libro"; Rec."Cod Libro")
                 {
                     ApplicationArea = All;
