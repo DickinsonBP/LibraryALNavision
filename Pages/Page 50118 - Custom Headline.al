@@ -2,7 +2,7 @@ page 50118 "Custom Headline"
 {
     PageType = HeadlinePart;
     SourceTable = Biblioteca;
-
+    //TODO: comprobar lo de los libros
     layout
     {
         area(Content)

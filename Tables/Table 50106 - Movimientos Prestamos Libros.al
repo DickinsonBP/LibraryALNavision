@@ -15,7 +15,7 @@ table 50106 "Movimientos Prestamos Libros"
             //TODO: El numero de prestamo es único por cada prestamo. No se incrementa por que por cada nuevo prestamo se genera uno nuevo por defecto.
             DataClassification = ToBeClassified;
             Editable = false;
-            // AutoIncrement = true;
+            AutoIncrement = true;
         }
         field(3; "Descripcion Libro"; Text[50])
         {
@@ -89,6 +89,10 @@ table 50106 "Movimientos Prestamos Libros"
             DataClassification = ToBeClassified;
             Editable = false;
         }
+        field(14; "Cod. Prestamo"; Code[20])
+        {
+            TableRelation = LineasPrestamos."Codigo Prestamo";
+        }
     }
 
     keys
@@ -98,6 +102,7 @@ table 50106 "Movimientos Prestamos Libros"
             Clustered = true;
         }
     }
+
     var
         cduNumeroSeriesMng: Codeunit NoSeriesManagement;
         recSalesSetup: Record "Sales & Receivables Setup";

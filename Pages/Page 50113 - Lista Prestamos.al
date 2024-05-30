@@ -36,6 +36,11 @@ page 50113 "Lista Prestamos"
                 {
                     ApplicationArea = All;
                 }
+                field(Amount; Rec.Amount)
+                {
+                    ApplicationArea = All;
+                    Caption = 'Subtotal';
+                }
                 field(Registrado; Rec.Registrado)
                 {
                     ApplicationArea = All;

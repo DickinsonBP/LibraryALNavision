@@ -9,8 +9,9 @@ page 50101 FichaLibros
     {
         area(Content)
         {
-            group(GroupName)
+            group(BookGroup)
             {
+                ShowCaption = false;
                 field(Codigo; Rec.Codigo)
                 {
                     ApplicationArea = All;
@@ -83,6 +84,17 @@ page 50101 FichaLibros
                 {
                     ApplicationArea = All;
                     Importance = Additional;
+                }
+            }
+            group(Relaciones)
+            {
+                ShowCaption = false;
+                part(Libros; SubpageMovimientosPrestamos)
+                {
+                    Caption = 'Prestamos';
+                    ApplicationArea = All;
+                    SubPageLink = "Cod. Libro" = field(Codigo);
+                    Editable = false;
                 }
             }
         }

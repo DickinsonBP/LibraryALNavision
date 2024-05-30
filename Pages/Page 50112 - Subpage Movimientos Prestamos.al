@@ -15,14 +15,20 @@ page 50112 SubpageMovimientosPrestamos
                     ApplicationArea = All;
 
                 }
-                field("Num. Prestamo"; Rec."Num. Prestamo")
+                field("Cod. Prestamo"; Rec."Cod. Prestamo")
                 {
                     ApplicationArea = All;
+                    Caption = 'Codigo Prestamo';
                 }
-                field("Descripcion Libro"; Rec."Descripcion Libro")
-                {
-                    ApplicationArea = All;
-                }
+
+                // field("Num. Prestamo"; Rec."Num. Prestamo")
+                // {
+                //     ApplicationArea = All;
+                // }
+                // field("Descripcion Libro"; Rec."Descripcion Libro")
+                // {
+                //     ApplicationArea = All;
+                // }
                 field("Fecha inicio Prestamo"; Rec."Fecha inicio Prestamo")
                 {
                     ApplicationArea = All;

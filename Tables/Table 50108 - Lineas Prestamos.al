@@ -95,7 +95,7 @@ table 50108 LineasPrestamos
                     rec."Descripcion Libro" := recLibro.Descripcion;
                     rec.Importe := reclibro."Importe PVP";
                     rec.Precio := Importe / porcentageImporte;
-                end
+                end;
             end;
         }
     }
@@ -149,6 +149,12 @@ table 50108 LineasPrestamos
         end;
     end;
 
+    trigger OnDelete()
+    begin
+        recMovimientosPrestamos.SetRange("Cod. Prestamo", rec."Codigo Prestamo");
+        recMovimientosPrestamos.DeleteAll();
+    end;
+
     procedure SetStartDate()
     begin
         "Fecha inicio Prestamo" := DT2Date(CurrentDateTime);
@@ -156,5 +162,6 @@ table 50108 LineasPrestamos
 
     var
         recCabeceraPrestamo: Record "Cabecera Prestamos";
+        recMovimientosPrestamos: Record "Movimientos Prestamos Libros";
 
 }

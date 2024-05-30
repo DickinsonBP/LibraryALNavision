@@ -44,6 +44,7 @@ page 50114 FichaPrestamos
             }
             group("Lineas")
             {
+                ShowCaption = false;
                 part(Lines; SubpageLineasPrestamos)
                 {
                     Caption = 'Lineas';
@@ -51,7 +52,17 @@ page 50114 FichaPrestamos
                     Enabled = rec."Cod. Cliente" <> '';
                     SubPageLink = "Codigo Prestamo" = field(Codigo);
                 }
-                //TODO: Añadir part para poner precios totales calculados de los libros
+            }
+            group(ControlAmount)
+            {
+                ShowCaption = false;
+                field("Subtotal excl. IVA"; Rec.Amount)
+                {
+                    ApplicationArea = All;
+                    Editable = false;
+                    Caption = 'Subtotal excl. IVA';
+                    ToolTip = 'Especifica la suma de los totales de cada linea excluyendo el IVA';
+                }
             }
         }
     }
@@ -68,15 +79,19 @@ page 50114 FichaPrestamos
                     recLineaPrestamo: Record LineasPrestamos;
                 begin
                     rec.Registrado := true;
-                    recMovimientosPrestamos.Init();
-                    recMovimientosPrestamos."No. Cliente" := rec."Cod. Cliente";
 
-                    if recLineaPrestamo.Get(rec.Codigo) then begin
-                        recMovimientosPrestamos."Cod. Libro" := recLineaPrestamo."Cod Libro";
-                        recMovimientosPrestamos."Fecha inicio Prestamo" := recLineaPrestamo."Fecha inicio Prestamo";
-                        recMovimientosPrestamos.Dias := recLineaPrestamo.Dias; //Se calcula la fecha de fin automaticamente en la tabla
+                    recLineaPrestamo.SetRange("Codigo Prestamo", rec.Codigo);
+                    if recLineaPrestamo.FindFirst() then begin
+                        repeat
+                            recMovimientosPrestamos.Init();
+                            recMovimientosPrestamos."Cod. Prestamo" := rec.Codigo;
+                            recMovimientosPrestamos."No. Cliente" := rec."Cod. Cliente";
+                            recMovimientosPrestamos."Cod. Libro" := recLineaPrestamo."Cod Libro";
+                            recMovimientosPrestamos."Fecha inicio Prestamo" := recLineaPrestamo."Fecha inicio Prestamo";
+                            recMovimientosPrestamos.Dias := recLineaPrestamo.Dias;
+                            recMovimientosPrestamos.Insert(true, false);
+                        until recLineaPrestamo.Next() = 0;
                     end;
-                    recMovimientosPrestamos.Insert(true, false);
                 end;
             }
         }

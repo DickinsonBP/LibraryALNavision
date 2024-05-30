@@ -72,6 +72,17 @@ table 50107 "Cabecera Prestamos"
                 // Modify();
             end;
         }
+        field(7; Amount; Decimal)
+        {
+            FieldClass = FlowField;
+            Editable = false;
+            CalcFormula = sum(
+                LineasPrestamos.Importe
+                where(
+                    "Codigo Prestamo" = field(Codigo)
+                )
+            );
+        }
         field(10; Registrado; Boolean)
         {
             DataClassification = ToBeClassified;
