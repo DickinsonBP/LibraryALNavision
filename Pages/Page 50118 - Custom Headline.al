@@ -1,7 +1,6 @@
 page 50118 "Custom Headline"
 {
     PageType = HeadlinePart;
-    SourceTable = Biblioteca;
     //TODO: comprobar lo de los libros
     layout
     {
@@ -11,23 +10,32 @@ page 50118 "Custom Headline"
             {
                 trigger OnDrillDown()
                 var
-                    DrillDownURLTxt: Label 'https://go.microsoft.com/fwlink/?linkid=867580', Locked = True;
+                    DrillDownURLTxt: Label 'https://github.com/DickinsonBP', Locked = True;
                 begin
                     Hyperlink(DrillDownURLTxt)
                 end;
             }
-            field(HeadLine2; StrSubstNo(hdlTxt2, rec."Numero de libros"))
-            {
-                ApplicationArea = All;
-            }
-            field(HeadLine3; StrSubstNo(hdlTxt3, rec."Numero de autores")) { ApplicationArea = All; }
-            field(HeadLine4; StrSubstNo(hdlTxt4, rec."Numero de editoriales")) { ApplicationArea = All; }
+            field(HeadLine2; StrSubstNo(hdlTxt2, recBiblioteca."Numero de libros")) { ApplicationArea = All; }
+            field(HeadLine3; StrSubstNo(hdlTxt3, recBiblioteca."Numero de autores")) { ApplicationArea = All; }
+            field(HeadLine4; StrSubstNo(hdlTxt4, recBiblioteca."Numero de editoriales")) { ApplicationArea = All; }
         }
     }
 
     var
         hdlTxt1: Label 'HOLAAAAAAAAAAA';
-        hdlTxt2: Label 'Numero de libros %1';
-        hdlTxt3: Label 'Numero de autores %1';
-        hdlTxt4: Label 'Numero de editoriales %1';
+        hdlTxt2: Label 'Numero de libros <emphasize>%1</emphasize>';
+        hdlTxt3: Label 'Numero de autores <emphasize>%1</emphasize>';
+        hdlTxt4: Label 'Numero de editoriales <emphasize>%1</emphasize>';
+        recBiblioteca: Record Biblioteca;
+
+    trigger OnOpenPage()
+    begin
+        recBiblioteca.Reset(); //Para quitar filtros, no hace falta
+        recBiblioteca.FindSet(); //Coge todas las biblitecas
+        //Recalcular los datos
+        recBiblioteca.CalcFields("Numero de libros");
+        recBiblioteca.CalcFields("Numero de autores");
+        recBiblioteca.CalcFields("Numero de editoriales");
+    end;
+
 }
