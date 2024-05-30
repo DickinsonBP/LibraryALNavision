@@ -9,8 +9,6 @@ table 50108 LineasPrestamos
             DataClassification = ToBeClassified;
             TableRelation = "Cabecera Prestamos".Codigo;
         }
-
-        //TODO Numero de linea que sea autoincremental.
         field(2; "Num. linea"; Integer)
         {
             DataClassification = ToBeClassified;

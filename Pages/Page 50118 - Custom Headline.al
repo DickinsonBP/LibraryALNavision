@@ -1,7 +1,6 @@
 page 50118 "Custom Headline"
 {
     PageType = HeadlinePart;
-    //TODO: comprobar lo de los libros
     layout
     {
         area(Content)
@@ -37,5 +36,4 @@ page 50118 "Custom Headline"
         recBiblioteca.CalcFields("Numero de autores");
         recBiblioteca.CalcFields("Numero de editoriales");
     end;
-
 }
