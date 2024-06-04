@@ -34,6 +34,7 @@ table 50107 "Cabecera Prestamos"
                     rec."Nombre Cliente" := recUsuario.Name;
                     rec."Telefono Cliente" := recUsuario."Phone No.";
                 end;
+                TestField(rec.Registrado, false);
             end;
         }
         field(3; "Nombre Cliente"; Text[50])
@@ -77,11 +78,23 @@ table 50107 "Cabecera Prestamos"
             FieldClass = FlowField;
             Editable = false;
             CalcFormula = sum(
-                LineasPrestamos.Importe
+                LineasPrestamos.Precio
                 where(
                     "Codigo Prestamo" = field(Codigo)
                 )
             );
+        }
+        field(8; IVAGroup; Code[20])
+        {
+            TableRelation = "VAT Product Posting Group";
+            trigger OnValidate()
+            begin
+
+            end;
+        }
+        field(9; "VAT %"; Decimal)
+        {
+            DataClassification = ToBeClassified;
         }
         field(10; Registrado; Boolean)
         {
@@ -111,8 +124,8 @@ table 50107 "Cabecera Prestamos"
             SalesSetup.Get();
             SalesSetup.TestField("Nº serie prestamo");
             "Nº serie" := SalesSetup."Nº serie prestamo";
-            Codigo := NoSeriesMgt.GetNextNo("Nº serie", WorkDate(), true);
-            // Codigo := NoSeriesMgt.InitSeries("Nº serie", WorkDate(), true);
+            // Codigo := NoSeriesMgt.GetNextNo("Nº serie", WorkDate(), true);
+            NoSeriesMgt.InitSeries(SalesSetup."Nº serie prestamo", xRec."Nº serie", 0D, Codigo, "Nº serie");
             "Fecha Venta" := DT2Date(CurrentDateTime);
             CreateLinea();
         end;

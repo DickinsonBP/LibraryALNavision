@@ -26,18 +26,6 @@ table 50108 LineasPrestamos
         {
             DataClassification = ToBeClassified;
             TableRelation = Customer."No.";
-
-            trigger OnValidate()
-            var
-                recUsuario: Record Customer;
-            begin
-                if recUsuario.Get("No. Cliente") then begin
-                    rec."Nombre Cliente" := recUsuario.Name;
-                    rec."Direccion Cliente" := recUsuario.Address;
-                    rec."Poblacion Cliente" := recusuario.City;
-                    rec."Telefono Cliente" := recUsuario."Phone No.";
-                end;
-            end;
         }
 
         field(6; "Nombre Cliente"; Text[50])
@@ -104,9 +92,6 @@ table 50108 LineasPrestamos
         {
             Clustered = true;
         }
-        key(LineaInfo; "Num. linea")
-        {
-        }
     }
 
     trigger OnInsert()
@@ -147,19 +132,18 @@ table 50108 LineasPrestamos
         end;
     end;
 
-    trigger OnDelete()
-    begin
-        recMovimientosPrestamos.SetRange("Cod. Prestamo", rec."Codigo Prestamo");
-        recMovimientosPrestamos.DeleteAll();
-    end;
+    // trigger OnDelete()
+    // var
+    //     recMovimientosPrestamos: Record "Movimientos Prestamos Libros";
+    // begin
+    //     recMovimientosPrestamos.SetRange("Cod. Prestamo", rec."Codigo Prestamo");
+    //     recMovimientosPrestamos.DeleteAll();
+    // end;
 
     procedure SetStartDate()
     begin
         "Fecha inicio Prestamo" := DT2Date(CurrentDateTime);
     end;
 
-    var
-        recCabeceraPrestamo: Record "Cabecera Prestamos";
-        recMovimientosPrestamos: Record "Movimientos Prestamos Libros";
 
 }

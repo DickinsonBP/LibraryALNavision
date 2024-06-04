@@ -12,10 +12,7 @@ table 50106 "Movimientos Prestamos Libros"
         }
         field(2; "Num. Prestamo"; Integer)
         {
-            //TODO: El numero de prestamo es único por cada prestamo. No se incrementa por que por cada nuevo prestamo se genera uno nuevo por defecto.
             DataClassification = ToBeClassified;
-            Editable = false;
-            AutoIncrement = true;
         }
         field(3; "Descripcion Libro"; Text[50])
         {
@@ -31,17 +28,6 @@ table 50106 "Movimientos Prestamos Libros"
         {
             DataClassification = ToBeClassified;
             TableRelation = Customer."No.";
-            trigger OnValidate()
-            var
-                recUsuario: Record Customer;
-            begin
-                if recUsuario.Get("No. Cliente") then begin
-                    rec."Nombre Cliente" := recUsuario.Name;
-                    rec."Direccion Cliente" := recUsuario.Address;
-                    rec."Poblacion Cliente" := recUsuario.City;
-                    rec."Telefono Cliente" := recUsuario."Phone No.";
-                end;
-            end;
         }
         field(6; "Nombre Cliente"; Text[50])
         {
@@ -103,16 +89,24 @@ table 50106 "Movimientos Prestamos Libros"
         }
     }
 
-    var
-        cduNumeroSeriesMng: Codeunit NoSeriesManagement;
-        recSalesSetup: Record "Sales & Receivables Setup";
-
     trigger OnInsert()
     var
         recUsuario: Record Customer;
         recLibro: Record Libros;
+        lCodigoNuevo: Code[20];
+        recMovimientosPrestamo: Record "Movimientos Prestamos Libros";
     begin
-        "Num. Prestamo" := "Num. Prestamo" + 1;
+        // "Num. Prestamo" := "Num. Prestamo" + 1;
+        "Num. Prestamo" := 1000;
+        lCodigoNuevo := "Cod. Libro";
+        "Cod. Libro" := '';
+        recMovimientosPrestamo.SetRange("Cod. Libro", lCodigoNuevo);
+        recMovimientosPrestamo.SetRange("No. Cliente", rec."No. Cliente");
+        if recMovimientosPrestamo.FindLast() then begin end;
+        "Cod. Libro" := lCodigoNuevo;
+        "Num. Prestamo" := recMovimientosPrestamo."Num. Prestamo" + 1000;
+
+
         if recUsuario.Get("No. Cliente") then begin
             rec."Nombre Cliente" := recUsuario.Name;
             rec."Direccion Cliente" := recUsuario.Address;
