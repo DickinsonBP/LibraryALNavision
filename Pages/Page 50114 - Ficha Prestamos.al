@@ -78,26 +78,36 @@ page 50114 FichaPrestamos
         {
             action("Registrar")
             {
-                // Enabled = NOT rec.Registrado;
+                // Enabled = (NOT rec.Registrado) AND (rec."Cod. Cliente" <> '');
                 ApplicationArea = All;
                 trigger OnAction()
                 var
                     recMovimientosPrestamos: Record "Movimientos Prestamos Libros";
                     recLineaPrestamo: Record LineasPrestamos;
                 begin
-                    rec.Registrado := true;
+                    if rec.Registrado = false then begin
+                        if rec."Cod. Cliente" = '' then begin
+                            Error('Asigna un codigo de cliente antes de registrar');
+                        end;
 
-                    recLineaPrestamo.SetRange("Codigo Prestamo", rec.Codigo);
-                    if recLineaPrestamo.FindFirst() then begin
-                        repeat
-                            recMovimientosPrestamos.Init();
-                            recMovimientosPrestamos."Cod. Prestamo" := rec.Codigo;
-                            recMovimientosPrestamos."No. Cliente" := rec."Cod. Cliente";
-                            recMovimientosPrestamos."Cod. Libro" := recLineaPrestamo."Cod Libro";
-                            recMovimientosPrestamos."Fecha inicio Prestamo" := recLineaPrestamo."Fecha inicio Prestamo";
-                            recMovimientosPrestamos.Dias := recLineaPrestamo.Dias;
-                            recMovimientosPrestamos.Insert(true, false);
-                        until recLineaPrestamo.Next() = 0;
+                        recLineaPrestamo.SetRange("Codigo Prestamo", rec.Codigo);
+                        if recLineaPrestamo.FindFirst() then begin
+                            if recLineaPrestamo."Cod Libro" = '' then begin
+                                Error('Asigna un codigo de libro antes de poder registrar');
+                            end;
+                        end;
+                        if recLineaPrestamo.FindFirst() then begin
+                            repeat
+                                recMovimientosPrestamos.Init();
+                                recMovimientosPrestamos."Cod. Prestamo" := rec.Codigo;
+                                recMovimientosPrestamos."No. Cliente" := rec."Cod. Cliente";
+                                recMovimientosPrestamos."Cod. Libro" := recLineaPrestamo."Cod Libro";
+                                recMovimientosPrestamos."Fecha inicio Prestamo" := recLineaPrestamo."Fecha inicio Prestamo";
+                                recMovimientosPrestamos.Dias := recLineaPrestamo.Dias;
+                                recMovimientosPrestamos.Insert(true, false);
+                            until recLineaPrestamo.Next() = 0;
+                        end;
+                        rec.Registrado := true;
                     end;
                 end;
             }
