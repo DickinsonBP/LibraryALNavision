@@ -22,6 +22,7 @@ page 50115 SubpageLineasPrestamos
                 field("Cod Libro"; Rec."Cod Libro")
                 {
                     ApplicationArea = All;
+                    ShowMandatory = true;
                 }
                 field("Descripcion libro"; Rec."Descripcion libro")
                 {
@@ -54,6 +55,8 @@ page 50115 SubpageLineasPrestamos
                 field(Dias; Rec.Dias)
                 {
                     ApplicationArea = All;
+                    BlankZero = true;
+                    ShowMandatory = true;
                 }
                 field("Fecha fin"; Rec."Fecha fin")
                 {

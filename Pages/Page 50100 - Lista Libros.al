@@ -85,8 +85,9 @@ page 50100 "Lista de Libros"
                 }
 
             }
-            group(Relaciones)
+            group(Prestamos)
             {
+                ShowCaption = false;
                 part(Libros; SubpageMovimientosPrestamos)
                 {
                     Caption = 'Prestamos';

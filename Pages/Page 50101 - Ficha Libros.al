@@ -86,7 +86,7 @@ page 50101 FichaLibros
                     Importance = Additional;
                 }
             }
-            group(Relaciones)
+            group(Prestamos)
             {
                 ShowCaption = false;
                 part(Libros; SubpageMovimientosPrestamos)
